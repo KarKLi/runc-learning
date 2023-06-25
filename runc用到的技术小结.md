@@ -251,3 +251,19 @@ uid: 0
 euid: 0
 Are you root?
 ```
+
+## 6.cgroups技术
+cgroups技术是linux内核提供的一种功能，它是实现容器的核心，它实现了运行资源（如CPU、内存、磁盘I/O等）的限制与隔离，使一组进程（通常被叫作进程组）都只能使用宿主机一部分规定好的资源限额，从而达到资源控制的效果。[^1]
+
+而每种资源的控制都是实现内核定义的cgroupfs这种伪文件系统来达成的，这些子系统通常都由内核直接实现。[^2]
+
+cgroups是采用层级组织的方式进行管理的，也就是说，cgroup之间和进程之间一样，也存在着父子关系的组织层级。而cgroup的管理对象是一个进程组，也就是说不仅是一个进程可以受到cgroup的资源约束，多个进程都可以在一个cgroup下同时被约束，这就给容器这种需要在一个资源限制下执行多个进程的技术提供了可能性。[^2]
+
+cgroups技术在2.6.24版本被引入，但经过这么多年的发展后，cgroups子系统逐渐变得无序，难以管理，因此在4.5版本引入了新的cgroup技术，后者被称之为cgroups v2，相对应地，在2.6.24版本引入的cgroups被称为cgroups v1。[^2]
+
+## 6.1 cgroups v1
+
+
+
+[^1]: https://zh.wikipedia.org/wiki/Cgroups
+[^2]: https://man7.org/linux/man-pages/man7/cgroups.7.html
